@@ -1,0 +1,381 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin">
+
+  <TextView
+      android:id="@+id/txt_timer"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:text="00:00"
+      android:textSize="48sp"
+      />
+
+  <Button
+      android:id="@+id/btn_start_end_game"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/txt_timer"
+      android:layout_centerHorizontal="true"
+      android:text="@string/str_start_game"
+      android:textSize="28sp"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      android:layout_below="@id/txt_timer"
+      >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+      <LinearLayout
+          android:id="@+id/layout_score_inning_left"
+          android:layout_width="192dp"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:layout_alignParentLeft="true"
+          >
+
+        <TextView
+            android:id="@+id/txt_score_left"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="99"
+            android:textSize="48dp"
+            />
+
+        <TextView
+            android:id="@+id/txt_inning_score_left"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="99"
+            android:textSize="26dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+
+          <Button
+              android:id="@+id/btn_sub_score_left"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:text="@string/str_sub_score"
+              />
+
+          <Button
+              android:id="@+id/btn_add_score_left"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:text="@string/str_add_score"
+              />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_end_inning_left"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/str_end_inning"
+            />
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/layout_score_desc_left"
+          android:layout_width="96dp"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:layout_alignParentRight="true"
+          android:layout_marginTop="50dp"
+          >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+          <TextView
+              android:id="@+id/label_current_inning_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_inning"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_inning_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_inning_left"
+              android:text="999"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+          <TextView
+              android:id="@+id/label_current_avg_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_avg"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_avg_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_avg_left"
+              android:text="99.99"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+          <TextView
+              android:id="@+id/label_current_no_score_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_no_score"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_no_score_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_no_score_left"
+              android:text="99"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+          <TextView
+              android:id="@+id/label_current_foul_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_foul"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_foul_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_foul_left"
+              android:text="99"
+              />
+        </RelativeLayout>
+      </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Right -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+      <LinearLayout
+          android:id="@+id/layout_score_inning_right"
+          android:layout_width="192dp"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:layout_alignParentRight="true"
+          >
+
+        <TextView
+            android:id="@+id/txt_score_right"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="99"
+            android:textSize="48dp"
+            />
+
+        <TextView
+            android:id="@+id/txt_inning_score_right"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="99"
+            android:textSize="26dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+          <Button
+              android:id="@+id/btn_sub_score_right"
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="match_parent"
+              android:text="@string/str_sub_score"
+              />
+
+          <Button
+              android:id="@+id/btn_add_score_right"
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="match_parent"
+              android:text="@string/str_add_score"
+              />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_end_inning_right"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/str_end_inning"
+            />
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/layout_score_desc_right"
+          android:layout_width="96dp"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:layout_alignParentLeft="true"
+          android:layout_marginTop="50dp"
+          >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+          <TextView
+              android:id="@+id/label_current_inning_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_inning"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_inning_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_inning_right"
+              android:text="999"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+          <TextView
+              android:id="@+id/label_current_avg_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_avg"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_avg_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_avg_right"
+              android:text="99.99"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+          <TextView
+              android:id="@+id/label_current_no_score_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_no_score"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_no_score_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_no_score_right"
+              android:text="99"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+          <TextView
+              android:id="@+id/label_current_foul_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_foul"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_foul_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_foul_right"
+              android:text="99"
+              />
+        </RelativeLayout>
+      </LinearLayout>
+    </RelativeLayout>
+
+  </LinearLayout>
+
+</RelativeLayout>
