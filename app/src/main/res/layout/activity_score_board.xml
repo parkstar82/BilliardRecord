@@ -103,17 +103,19 @@
 
       <LinearLayout
           android:id="@+id/layout_score_desc_left"
-          android:layout_width="96dp"
-          android:layout_height="match_parent"
+          android:layout_width="90dp"
+          android:layout_height="wrap_content"
           android:orientation="vertical"
           android:layout_alignParentRight="true"
-          android:layout_marginTop="50dp"
+          android:layout_alignParentBottom="true"
           >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp"
+            
+            >
 
           <TextView
               android:id="@+id/label_current_inning_left"
@@ -136,7 +138,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp"
+            >
 
           <TextView
               android:id="@+id/label_current_avg_left"
@@ -159,13 +162,39 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp"
+            >
+
+          <TextView
+              android:id="@+id/label_current_highrun_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="@string/str_highrun"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_highrun_left"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_below="@id/label_current_highrun_left"
+              android:text="99"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            >
 
           <TextView
               android:id="@+id/label_current_no_score_left"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:text="@string/str_no_score"
               />
 
@@ -174,6 +203,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:layout_below="@id/label_current_no_score_left"
               android:text="99"
               />
@@ -181,13 +211,15 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
           <TextView
               android:id="@+id/label_current_foul_left"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:text="@string/str_foul"
               />
 
@@ -196,6 +228,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:layout_below="@id/label_current_foul_left"
               android:text="99"
               />
@@ -276,23 +309,25 @@
 
       <LinearLayout
           android:id="@+id/layout_score_desc_right"
-          android:layout_width="96dp"
-          android:layout_height="match_parent"
+          android:layout_width="90dp"
+          android:layout_height="wrap_content"
           android:orientation="vertical"
+          android:layout_alignParentBottom="true"
           android:layout_alignParentLeft="true"
-          android:layout_marginTop="50dp"
           >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp"
+            >
 
           <TextView
               android:id="@+id/label_current_inning_right"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:text="@string/str_inning"
               />
 
@@ -301,6 +336,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:layout_below="@id/label_current_inning_right"
               android:text="999"
               />
@@ -309,13 +345,15 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp"
+            >
 
           <TextView
               android:id="@+id/label_current_avg_right"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:text="@string/str_avg"
               />
 
@@ -324,6 +362,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:layout_below="@id/label_current_avg_right"
               android:text="99.99"
               />
@@ -332,13 +371,41 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp"
+            >
+
+          <TextView
+              android:id="@+id/label_current_highrun_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+
+              android:text="@string/str_highrun"
+              />
+
+          <TextView
+              android:id="@+id/txt_current_highrun_right"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+
+              android:layout_below="@id/label_current_highrun_right"
+              android:text="99"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            >
 
           <TextView
               android:id="@+id/label_current_no_score_right"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:text="@string/str_no_score"
               />
 
@@ -347,6 +414,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
+
               android:layout_below="@id/label_current_no_score_right"
               android:text="99"
               />
@@ -354,7 +422,8 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
           <TextView
               android:id="@+id/label_current_foul_right"

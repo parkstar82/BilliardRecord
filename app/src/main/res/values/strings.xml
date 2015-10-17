@@ -12,6 +12,7 @@
   <string name="str_inning">INNING</string>
   <string name="str_avg">AVG</string>
   <string name="str_no_score">공타</string>
+  <string name="str_highrun">하이런</string>
   <string name="str_foul">파울</string>
   <string name="str_add_score">+</string>
   <string name="str_sub_score">-</string>
