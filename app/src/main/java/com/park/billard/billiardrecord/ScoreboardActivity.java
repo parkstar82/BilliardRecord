@@ -63,6 +63,8 @@ public class ScoreboardActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_score_board);
     initViews();
+    enableButtons(false);
+    initValues();
   }
 
   public void initViews() {
@@ -156,7 +158,8 @@ public class ScoreboardActivity extends Activity {
     mTxtScoreLeft.setText("" + mScoreLeft);
     mCurAvgLeft = getAvg(mCurInningLeft, mScoreLeft);
     mTxtCurAvgLeft.setText(String.format("%.2f", mCurAvgLeft));
-    mTxtCurHighrunLeft.setText(getHighRun(Integer.parseInt(mTxtInningScoreLeft.getText().toString()), mHighRunLeft));
+    mHighRunLeft = getHighRun(Integer.parseInt(mTxtInningScoreLeft.getText().toString()), mHighRunLeft);
+    mTxtCurHighrunLeft.setText("" + mHighRunLeft);
 
     mTxtInningScoreLeft.setText("0");
     mInningScoreLeft = 0;
@@ -173,9 +176,11 @@ public class ScoreboardActivity extends Activity {
     mTxtScoreRight.setText("" + mScoreRight);
     mCurAvgRight= getAvg(mCurInningRight, mScoreRight);
     mTxtCurAvgRight.setText(String.format("%.2f", mCurAvgRight));
-    mTxtCurHighrunRight.setText(getHighRun(Integer.parseInt(mTxtInningScoreRight.getText().toString()), mHighRunRight));
+    mHighRunRight = getHighRun(Integer.parseInt(mTxtInningScoreRight.getText().toString()), mHighRunRight);
+    mTxtCurHighrunRight.setText("" + mHighRunRight);
 
     mTxtInningScoreRight.setText("0");
+    mInningScoreRight = 0;
   }
 
   private void setInningScoreLeft(int i) {
@@ -192,11 +197,11 @@ public class ScoreboardActivity extends Activity {
     return (float)score/inning;
   }
 
-  private String getHighRun(int score, int highRun) {
+  private int getHighRun(int score, int highRun) {
     if (highRun < score) {
-      return "" + score;
+      return score;
     } else {
-      return "" + highRun;
+      return highRun;
     }
   }
 
@@ -212,37 +217,7 @@ public class ScoreboardActivity extends Activity {
   private void startGame() {
     isStart = true;
     enableButtons(true);
-
-    mTxtTimer.setText("00:00:00");
-
-    mTxtScoreLeft.setText("0");
-    mTxtInningScoreLeft.setText("0");
-    mTxtCurInningLeft.setText("0");
-    mTxtCurAvgLeft.setText("0");
-    mTxtCurHighrunLeft.setText("0");
-    mTxtCurNoScoreLeft.setText("0");
-    mTxtCurFoulLeft.setText("0");
-
-    mTxtScoreRight.setText("0");
-    mTxtInningScoreRight.setText("0");
-    mTxtCurInningRight.setText("0");
-    mTxtCurAvgRight.setText("0");
-    mTxtCurHighrunRight.setText("0");
-    mTxtCurNoScoreRight.setText("0");
-    mTxtCurFoulRight.setText("0");
-
-    mScoreLeft = 0;
-    mScoreRight = 0;
-    mInningScoreLeft = 0;
-    mInningScoreRight = 0;
-    mCurInningLeft = 0;
-    mCurInningRight = 0;
-    mCurAvgLeft = 0.0f;
-    mCurAvgRight = 0.0f;
-    mHighRunLeft = 0;
-    mHighRunRight = 0;
-    mNoScoreLeft = 0;
-    mNoScoreRight = 0;
+    initValues();
 
     mBtnGameStart.setText(R.string.str_end_game);
 
@@ -282,6 +257,39 @@ public class ScoreboardActivity extends Activity {
     mBtnAddRight.setEnabled(enable);
     mBtnSubRight.setEnabled(enable);
     mBtnEndInningRight.setEnabled(enable);
+  }
+
+  private void initValues(){
+    mTxtTimer.setText("00:00:00");
+
+    mTxtScoreLeft.setText("0");
+    mTxtInningScoreLeft.setText("0");
+    mTxtCurInningLeft.setText("0");
+    mTxtCurAvgLeft.setText("0");
+    mTxtCurHighrunLeft.setText("0");
+    mTxtCurNoScoreLeft.setText("0");
+    mTxtCurFoulLeft.setText("0");
+
+    mTxtScoreRight.setText("0");
+    mTxtInningScoreRight.setText("0");
+    mTxtCurInningRight.setText("0");
+    mTxtCurAvgRight.setText("0");
+    mTxtCurHighrunRight.setText("0");
+    mTxtCurNoScoreRight.setText("0");
+    mTxtCurFoulRight.setText("0");
+
+    mScoreLeft = 0;
+    mScoreRight = 0;
+    mInningScoreLeft = 0;
+    mInningScoreRight = 0;
+    mCurInningLeft = 0;
+    mCurInningRight = 0;
+    mCurAvgLeft = 0.0f;
+    mCurAvgRight = 0.0f;
+    mHighRunLeft = 0;
+    mHighRunRight = 0;
+    mNoScoreLeft = 0;
+    mNoScoreRight = 0;
   }
 
 }
