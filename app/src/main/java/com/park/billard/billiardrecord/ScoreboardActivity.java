@@ -1,9 +1,16 @@
 package com.park.billard.billiardrecord;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -55,8 +62,11 @@ public class ScoreboardActivity extends Activity {
   public int mHighRunRight = 0;
   public int mNoScoreLeft = 0;
   public int mNoScoreRight = 0;
-  public int mFoulLeft = 0;
-  public int mFoulRight = 0;
+
+  public TextView mAnimationLeft = null;
+  public TextView mAnimationRight = null;
+
+  Vibrator mVibrator = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +75,7 @@ public class ScoreboardActivity extends Activity {
     initViews();
     enableButtons(false);
     initValues();
+    mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
   }
 
   public void initViews() {
@@ -77,6 +88,7 @@ public class ScoreboardActivity extends Activity {
     mTxtCurHighrunLeft = (TextView) findViewById(R.id.txt_current_highrun_left);
     mTxtCurNoScoreLeft = (TextView) findViewById(R.id.txt_current_no_score_left);
     mTxtCurFoulLeft = (TextView) findViewById(R.id.txt_current_foul_left);
+    mAnimationLeft = (TextView) findViewById(R.id.txt_animation_left);
 
     mTxtScoreRight = (TextView) findViewById(R.id.txt_score_right);
     mTxtInningScoreRight = (TextView) findViewById(R.id.txt_inning_score_right);
@@ -85,6 +97,7 @@ public class ScoreboardActivity extends Activity {
     mTxtCurHighrunRight = (TextView) findViewById(R.id.txt_current_highrun_right);
     mTxtCurNoScoreRight = (TextView) findViewById(R.id.txt_current_no_score_right);
     mTxtCurFoulRight = (TextView) findViewById(R.id.txt_current_foul_right);
+    mAnimationRight = (TextView) findViewById(R.id.txt_animation_right);
 
     mBtnGameStart = (Button) findViewById(R.id.btn_start_end_game);
 
@@ -96,54 +109,63 @@ public class ScoreboardActivity extends Activity {
     mBtnSubRight = (Button) findViewById(R.id.btn_sub_score_right);
     mBtnEndInningRight = (Button) findViewById(R.id.btn_end_inning_right);
 
-    mBtnGameStart.setOnClickListener(mButtonClickListener);
+    mBtnGameStart.setOnTouchListener(mButtonClickListener);
 
-    mBtnAddLeft.setOnClickListener(mButtonClickListener);
-    mBtnSubLeft.setOnClickListener(mButtonClickListener);
-    mBtnEndInningLeft.setOnClickListener(mButtonClickListener);
+    mBtnAddLeft.setOnTouchListener(mButtonClickListener);
+    mBtnSubLeft.setOnTouchListener(mButtonClickListener);
+    mBtnEndInningLeft.setOnTouchListener(mButtonClickListener);
 
-    mBtnAddRight.setOnClickListener(mButtonClickListener);
-    mBtnSubRight.setOnClickListener(mButtonClickListener);
-    mBtnEndInningRight.setOnClickListener(mButtonClickListener);
+    mBtnAddRight.setOnTouchListener(mButtonClickListener);
+    mBtnSubRight.setOnTouchListener(mButtonClickListener);
+    mBtnEndInningRight.setOnTouchListener(mButtonClickListener);
 
   }
 
 
-  View.OnClickListener mButtonClickListener = new View.OnClickListener() {
+  View.OnTouchListener mButtonClickListener = new View.OnTouchListener() {
 
     @Override
-    public void onClick(View view) {
-      switch (view.getId()) {
-        // TODO : 파울 버튼 만들기
-
-        case R.id.btn_start_end_game:
-          if (!isStart) {
-            startGame();
-          } else {
-            endGame();
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+      switch (motionEvent.getAction()){
+        case MotionEvent.ACTION_DOWN:
+          mVibrator.vibrate(300);
+          break;
+        case MotionEvent.ACTION_UP:
+          switch (view.getId()) {
+            case R.id.btn_start_end_game:
+              if (!isStart) {
+                startGame();
+              } else {
+                endGame();
+              }
+              break;
+            case R.id.btn_add_score_left:
+              setInningScoreLeft(1);
+              break;
+            case R.id.btn_sub_score_left:
+              setInningScoreLeft(-1);
+              break;
+            case R.id.btn_end_inning_left:
+              int inningScore = Integer.parseInt(mTxtInningScoreLeft.getText().toString());
+              setScoreLeftAnimation("" + inningScore);
+              break;
+            case R.id.btn_add_score_right:
+              setInningScoreRight(1);
+              break;
+            case R.id.btn_sub_score_right:
+              setInningScoreRight(-1);
+              break;
+            case R.id.btn_end_inning_right:
+              int inningScoreRight = Integer.parseInt(mTxtInningScoreRight.getText().toString());
+              setScoreRightAnimation("" + inningScoreRight);
+              break;
+            default:
+              break;
           }
           break;
-        case R.id.btn_add_score_left:
-          setInningScoreLeft(1);
-          break;
-        case R.id.btn_sub_score_left:
-          setInningScoreLeft(-1);
-          break;
-        case R.id.btn_end_inning_left:
-          endInningLeft();
-          break;
-        case R.id.btn_add_score_right:
-          setInningScoreRight(1);
-          break;
-        case R.id.btn_sub_score_right:
-          setInningScoreRight(-1);
-          break;
-        case R.id.btn_end_inning_right:
-          endInningRight();
-          break;
-        default:
-          break;
       }
+
+      return true;
     }
   };
 
@@ -240,7 +262,7 @@ public class ScoreboardActivity extends Activity {
       StringBuilder stringBuilder = new StringBuilder();
       stringBuilder.append(String.format("%02d", hour));
       stringBuilder.append(":");
-      stringBuilder.append(String.format("%02d", minutes));
+      stringBuilder.append(String.format("%02d", minutes%60));
       stringBuilder.append(":");
       stringBuilder.append(String.format("%02d", second));
 
@@ -292,4 +314,97 @@ public class ScoreboardActivity extends Activity {
     mNoScoreRight = 0;
   }
 
+  private void setScoreLeftAnimation(String score){
+    int leftInningEndXY[] = new int[2];
+    int leftInningScoreXY[] = new int[2];
+
+    mBtnEndInningLeft.getLocationOnScreen(leftInningEndXY);
+    mTxtInningScoreLeft.getLocationOnScreen(leftInningScoreXY);
+
+    float leftInningScoreY = leftInningScoreXY[1];
+
+    ScaleAnimation scaleAni = new ScaleAnimation(1f, 1f, 1f, 0.7f);
+    scaleAni.setDuration(1000);
+
+    TranslateAnimation transAni = new TranslateAnimation(
+        Animation.RELATIVE_TO_PARENT, 0f, Animation.RELATIVE_TO_PARENT, 0f,
+        Animation.ABSOLUTE, 0f, Animation.ABSOLUTE, -leftInningScoreY
+    );
+    transAni.setDuration(1000);
+
+    AnimationSet aniSet = new AnimationSet(true);
+    aniSet.setFillBefore(true);
+    aniSet.setFillEnabled(true);
+    aniSet.addAnimation(scaleAni);
+    aniSet.addAnimation(transAni);
+
+    mAnimationLeft.setText("" + score);
+    mAnimationLeft.setVisibility(View.VISIBLE);
+    mAnimationLeft.startAnimation(aniSet);
+
+    aniSet.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart(Animation animation) {
+
+      }
+
+      @Override
+      public void onAnimationEnd(Animation animation) {
+        mAnimationLeft.setVisibility(View.GONE);
+        endInningLeft();
+      }
+
+      @Override
+      public void onAnimationRepeat(Animation animation) {
+
+      }
+    });
+  }
+
+  private void setScoreRightAnimation(String score){
+    int inningEndXY[] = new int[2];
+    int inningScoreXY[] = new int[2];
+
+    mBtnEndInningRight.getLocationOnScreen(inningEndXY);
+    mTxtInningScoreRight.getLocationOnScreen(inningScoreXY);
+
+    float inningScoreY = inningScoreXY[1];
+
+    ScaleAnimation scaleAni = new ScaleAnimation(1f, 1f, 1f, 0.7f);
+    scaleAni.setDuration(1000);
+
+    TranslateAnimation transAni = new TranslateAnimation(
+        Animation.RELATIVE_TO_PARENT, 0f, Animation.RELATIVE_TO_PARENT, 0f,
+        Animation.ABSOLUTE, 0f, Animation.ABSOLUTE, -inningScoreY
+    );
+    transAni.setDuration(1000);
+
+    AnimationSet aniSet = new AnimationSet(true);
+    aniSet.setFillBefore(true);
+    aniSet.setFillEnabled(true);
+    aniSet.addAnimation(scaleAni);
+    aniSet.addAnimation(transAni);
+
+    mAnimationRight.setText(""+score);
+    mAnimationRight.setVisibility(View.VISIBLE);
+    mAnimationRight.startAnimation(aniSet);
+
+    aniSet.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart(Animation animation) {
+
+      }
+
+      @Override
+      public void onAnimationEnd(Animation animation) {
+        mAnimationRight.setVisibility(View.GONE);
+        endInningRight();
+      }
+
+      @Override
+      public void onAnimationRepeat(Animation animation) {
+
+      }
+    });
+  }
 }

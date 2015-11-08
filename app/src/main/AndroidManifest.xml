@@ -21,9 +21,10 @@
             android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
             >
-
         </activity>
-
     </application>
+
+    <!-- permissions -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
 </manifest>
